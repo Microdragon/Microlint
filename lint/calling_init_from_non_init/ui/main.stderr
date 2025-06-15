@@ -1,0 +1,51 @@
+error: calling a function marked as `#[init]` from a non-`#[init]` function
+  --> $DIR/main.rs:38:5
+   |
+LL |     init_foo();
+   |     ^^^^^^^^^^
+   |
+   = note: `#[deny(calling_init_from_non_init)]` on by default
+help: consider marking the calling function as `#[init]` too
+   |
+LL + #[init]
+LL | fn main() {
+   |
+
+error: calling a function marked as `#[init]` from a non-`#[init]` function
+  --> $DIR/main.rs:43:5
+   |
+LL |     a.init_foo();
+   |     ^^^^^^^^^^^^
+   |
+help: consider marking the calling function as `#[init]` too
+   |
+LL + #[init]
+LL | fn main() {
+   |
+
+error: calling a function marked as `#[init]` from a non-`#[init]` function
+  --> $DIR/main.rs:48:5
+   |
+LL |     b.init_foo();
+   |     ^^^^^^^^^^^^
+   |
+help: consider marking the calling function as `#[init]` too
+   |
+LL + #[init]
+LL | fn main() {
+   |
+
+error: calling a function marked as `#[init]` from a non-`#[init]` function
+  --> $DIR/main.rs:53:5
+   |
+LL |     c.init_foo();
+   |     ^^^^^^^^^^^^
+   |
+help: consider marking the calling function as `#[init]` too
+   |
+LL + #[init]
+LL | fn main() {
+   |
+
+error: aborting due to 4 previous errors
+

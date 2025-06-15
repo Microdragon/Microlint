@@ -1,0 +1,27 @@
+error: accessing a static marked as `#[init]` from a non-`#[init]` function
+  --> $DIR/main.rs:12:24
+   |
+LL |     let y = BAR + 10 * BAR.trailing_zeros() as u64;
+   |                        ^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[deny(accessing_init_from_non_init)]` on by default
+help: consider marking the accessing function as `#[init]` too
+   |
+LL + #[init]
+LL | fn main() {
+   |
+
+error: accessing a static marked as `#[init]` from a non-`#[init]` function
+  --> $DIR/main.rs:14:24
+   |
+LL |     let z = OWO + 10 * OWO.trailing_zeros() as usize;
+   |                        ^^^^^^^^^^^^^^^^^^^^
+   |
+help: consider marking the accessing function as `#[init]` too
+   |
+LL + #[init]
+LL | fn main() {
+   |
+
+error: aborting due to 2 previous errors
+

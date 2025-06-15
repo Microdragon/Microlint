@@ -1,0 +1,54 @@
+[workspace]
+resolver = "3"
+members = ["lint/*"]
+
+[workspace.package]
+version = "0.0.0"
+authors = ["rain336 <rain@microdragon.rs>"]
+edition = "2021"
+license = "MPL-2.0"
+publish = false
+
+[workspace.dependencies]
+clippy_utils = { git = "https://github.com/rust-lang/rust-clippy", rev = "7bb54d91be1af212faaa078786c1d2271a67d4f9" }
+dylint_linting = "4.1.0"
+dylint_testing = "4.1.0"
+
+[workspace.lints.clippy]
+nursery = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+option-if-let-else = "allow"
+struct-field-names = "allow"
+
+[workspace.lints.rust.unexpected_cfgs]
+level = "deny"
+check-cfg = ["cfg(dylint_lib, values(any()))"]
+
+[workspace.metadata.dylint]
+libraries = [{ path = "." }]
+
+[package]
+name = "microlint"
+version.workspace = true
+authors.workspace = true
+description = "Linting for the microdragon kernel"
+edition.workspace = true
+homepage = "https://microdragon.rs/"
+license.workspace = true
+repository = "https://github.com/microdragon/microdragon"
+publish.workspace = true
+
+[package.metadata.rust-analyzer]
+rustc_private = true
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+calling_init_from_non_init = { path = "lint/calling_init_from_non_init", features = [
+    "rlib",
+] }
+accessing_init_from_non_init = { path = "lint/accessing_init_from_non_init", features = [
+    "rlib",
+] }
+dylint_linting = { workspace = true }
